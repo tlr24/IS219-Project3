@@ -71,4 +71,4 @@ def delete_location(loc_id):
     db.session.delete(location)
     db.session.commit()
     flash('Location Deleted', 'success')
-    return redirect(url_for('location.browse_locations'), 302)
+    return redirect(url_for('map.browse_locations'), 302)
