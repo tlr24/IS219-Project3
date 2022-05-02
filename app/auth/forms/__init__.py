@@ -1,3 +1,4 @@
+import re
 from flask_wtf import FlaskForm
 from wtforms import validators
 from wtforms.fields import *
@@ -24,7 +25,6 @@ class register_form(FlaskForm):
     password = PasswordField('Create Password', [
         validators.DataRequired(),
         validators.length(min=6, message='Password does not meet minimum length'),
-        #validators.Regexp(re.compile('a+'), message="this works"),
         validate_lowercase,
         validate_uppercase,
         special_character,
