@@ -7,7 +7,7 @@ class location_edit_form(FlaskForm):
     title = TextAreaField('Title', [validators.DataRequired(), validators.length(max=300)], description="Please add information about yourself")
     longitude = TextAreaField('Longitude', [validators.DataRequired(), validators.length(max=300)], description="Please add information about yourself")
     latitude = TextAreaField('Latitude', [validators.DataRequired(), validators.length(max=300)], description="Please add information about yourself")
-    population = IntegerField('Population', [validators.DataRequired(), validators.length(max=300)], description="Please add information about yourself")
+    population = IntegerField('Population', [validators.DataRequired()], description="Please add information about yourself")
     submit = SubmitField()
 
 class add_location_form(FlaskForm):

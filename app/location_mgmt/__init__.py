@@ -39,7 +39,7 @@ def edit_location(loc_id):
         db.session.commit()
         flash('Location Edited Successfully', 'success')
         current_app.logger.info("edited a location")
-        return redirect(url_for('map.location_datatables'))
+        return redirect(url_for('map.browse_locations'))
     return render_template('loc_edit.html', form=form)
 
 
