@@ -23,8 +23,16 @@ def browse_locations(page):
     per_page = 10
     pagination = Location.query.paginate(page, per_page, error_out=False)
     data = pagination.items
+    retrieve_url = ('locations.retrieve_location', [('loc_id', ':id')])
+    add_url = 'locations.add_location'
+    edit_url = ('locations.edit_location', [('loc_id', ':id')])
+    delete_url = ('locations.delete_location', [('loc_id', ':id')])
+
+    current_app.logger.info("Browse page loading")
+
     try:
-        return render_template('browse_locations.html',data=data,pagination=pagination)
+        return render_template('browse_locations.html', add_url=add_url, edit_url=edit_url, delete_url=delete_url,
+                           retrieve_url=retrieve_url, data=data, Location=Location, record_type="Locations", pagination=pagination)
     except TemplateNotFound:
         abort(404)
 
