@@ -8,12 +8,21 @@
             {{ render_form(form) }}
         </div>
         <div id="message" class="col-5">
-            <div id="letter" class="red">
+            <div class="progress">
+                <div id="p-bar" class="progress-bar" style="width: 0%" role="progressbar" aria-valuenow="0"
+                     aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <div id="lower" class="red">
                 Has lower case letter
-                <div class="progress">
-                    <div id="p-bar" class="progress-bar" style="width: 0%" role="progressbar" aria-valuenow="0"
-                         aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
+            </div>
+            <div id="upper">
+                Has uppercase letter
+            </div>
+            <div id="special">
+                Has special character
+            </div>
+            <div id="length">
+                Has at least 6 characters
             </div>
 
         </div>
@@ -30,8 +39,11 @@
 
 
     <script>
-        var passwordField = document.getElementById("password");
-        var letter = document.getElementById("letter");
+        let passwordField = document.getElementById("password");
+        let lower = document.getElementById("lower");
+        let upper = document.getElementById("upper");
+        let length = document.getElementById("length");
+        let special = document.getElementById("special");
         let lowerCase = new Observable(0);
         let upperCase = new Observable(0);
         let specialCharacter = new Observable(0);
@@ -66,7 +78,7 @@
             };
         }
 
-        function setProgressBarWidth(id,change) {
+        function setProgressBarWidth(id, change) {
             let progress_bar = document.getElementById(id);
             let progressBarCurrentWidth_string = progress_bar.style.width.toString()
             let width_current_value = parseInt(progressBarCurrentWidth_string.substring(0, progressBarCurrentWidth_string.length - 1));
@@ -78,37 +90,53 @@
 
         lowerCase.onChange(function (v) {
 
-            if(v === 0) {
-                setProgressBarWidth(id,-25)
+            if (v === 0) {
+                lower.classList.remove("valid");
+                lower.classList.add("invalid");
+                setProgressBarWidth(id, -25)
             } else {
-                setProgressBarWidth(id,+25)
+                lower.classList.remove("invalid");
+                lower.classList.add("valid");
+                setProgressBarWidth(id, +25)
             }
         });
 
         passwordLength.onChange(function (v) {
 
-            if(v === 0) {
-                setProgressBarWidth(id,-25)
+            if (v === 0) {
+                length.classList.remove("valid");
+                length.classList.add("invalid");
+                setProgressBarWidth(id, -25)
             } else {
-                setProgressBarWidth(id,+25)
+                length.classList.remove("invalid");
+                length.classList.add("valid");
+                setProgressBarWidth(id, +25)
             }
         });
 
         upperCase.onChange(function (v) {
 
-            if(v === 0) {
-                setProgressBarWidth(id,-25)
+            if (v === 0) {
+                upper.classList.remove("valid");
+                upper.classList.add("invalid");
+                setProgressBarWidth(id, -25)
             } else {
-                setProgressBarWidth(id,+25)
+                upper.classList.remove("invalid");
+                upper.classList.add("valid");
+                setProgressBarWidth(id, +25)
             }
         });
 
         specialCharacter.onChange(function (v) {
 
-            if(v === 0) {
-                setProgressBarWidth(id,-25)
+            if (v === 0) {
+                special.classList.remove("valid");
+                special.classList.add("invalid");
+                setProgressBarWidth(id, -25)
             } else {
-                setProgressBarWidth(id,+25)
+                special.classList.remove("invalid");
+                special.classList.add("valid");
+                setProgressBarWidth(id, +25)
             }
         });
 
@@ -120,7 +148,7 @@
             let specialCharacters = /[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi;
             let passwordMinLength = 6;
 
-            if(passwordField.value.length >= passwordMinLength) {
+            if (passwordField.value.length >= passwordMinLength) {
                 passwordLength.setValue(1);
             } else {
                 passwordLength.setValue(0);

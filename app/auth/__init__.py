@@ -1,5 +1,4 @@
 import logging
-
 from flask import Blueprint, render_template, redirect, url_for, flash, current_app, abort
 from flask_login import login_user, login_required, logout_user, current_user
 from jinja2 import TemplateNotFound
@@ -36,7 +35,7 @@ def register():
                           recipients=[user.email])
             msg.body = "Welcome to the site"
 
-            current_app.mail.send(msg)
+            #current_app.mail.send(msg)
             flash('Congratulations, you are now a registered user!', "success")
 
             return redirect(url_for('auth.login'), 302)
